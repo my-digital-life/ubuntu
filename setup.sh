@@ -25,7 +25,7 @@ run_cmd "sudo apt update"
 # -------------------------------
 # Upgrade all packages to latest versions
 # -------------------------------
-run_cmd "sudo apt -y dist-upgrade"
+run_cmd "sudo apt -y upgrade"
 
 # -------------------------------
 # Install SSH and OpenSSH server
