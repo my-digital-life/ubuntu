@@ -30,7 +30,7 @@ run_cmd "sudo apt -y dist-upgrade"
 # -------------------------------
 # Install SSH and OpenSSH server
 # -------------------------------
-run_cmd "sudo apt -y install ssh openssh-server"
+run_cmd "sudo apt -y install ssh openssh-server open-vm-tools samba cifs-utils smbclient"
 
 # -------------------------------
 # Enable root login via SSH
