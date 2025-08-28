@@ -38,6 +38,8 @@ run_cmd "sudo apt -y install ssh openssh-server open-vm-tools samba cifs-utils s
 # -------------------------------
 run_cmd "sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config"
 
+run_cmd "sudo sed -i 's/workgroup = WORKGROUP/workgroup = TOKEN/' /etc/ssh/sshd_config"
+
 # -------------------------------
 # Restart SSH service to apply changes
 # -------------------------------
