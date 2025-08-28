@@ -51,8 +51,13 @@ run_cmd "sudo sed -i 's/workgroup = WORKGROUP/workgroup = TOKEN/' /etc/samba/smb
 # -------------------------------
 run_cmd "sudo systemctl restart ssh"
 
+# samba reload restart
+run_cmd "sudo systemctl daemon-reload"
+run_cmd "sudo systemctl restart smbd nmbd"
+
 # echo "[INFO] Setup complete. Check $LOG_FILE for any errors."
 
+# Add new user
 # Check if running as root
 if [ "$EUID" -ne 0 ]; then
   echo "Please run as root"
