@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# curl -sSL https://raw.githubusercontent.com/my-digital-life/ubuntu/refs/heads/main/setup.sh -o setup.sh && chmod +x setup.sh && ./setup.sh
+
 echo "Starting script setup.sh"
 set -x
 
@@ -49,4 +51,23 @@ run_cmd "sudo sed -i 's/workgroup = WORKGROUP/workgroup = TOKEN/' /etc/samba/smb
 # -------------------------------
 run_cmd "sudo systemctl restart ssh"
 
-echo "[INFO] Setup complete. Check $LOG_FILE for any errors."
+# echo "[INFO] Setup complete. Check $LOG_FILE for any errors."
+
+# Check if running as root
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run as root"
+  exit 1
+fi
+
+# Create the user
+USERNAME="user"
+PASSWORD="user"
+
+# Check if user already exists
+if id "$USERNAME" &>/dev/null; then
+  echo "User '$USERNAME' already exists."
+else
+  useradd -m "$USERNAME"
+  echo "$USERNAME:$PASSWORD" | chpasswd
+  echo "User '$USERNAME' created with password '$PASSWORD'."
+fi
