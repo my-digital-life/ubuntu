@@ -2,26 +2,6 @@
 
 # curl -sSL https://raw.githubusercontent.com/my-digital-life/ubuntu/refs/heads/main/setup.sh -o setup.sh && chmod +x setup.sh && ./setup.sh
 
-echo "Starting script setup.sh"
-set -x
-
-# Define a log file for error reporting
-LOG_FILE="/var/log/server_setup.log"
-
-# Function to log errors
-log_error() {
-    echo "[ERROR] $1" | tee -a "$LOG_FILE"
-}
-
-# Function to run a command and log errors if it fails
-run_cmd() {
-    echo "[INFO] Running: $1"
-    eval "$1"
-    if [ $? -ne 0 ]; then
-        log_error "Command failed: $1"
-    fi
-}
-
 # -------------------------------
 # Update package lists
 # -------------------------------
@@ -44,7 +24,7 @@ run_cmd "sudo apt -y install ssh openssh-server open-vm-tools samba cifs-utils s
 # -------------------------------
 run_cmd "sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config"
 
-run_cmd "sudo sed -i 's/workgroup = WORKGROUP/workgroup = TOKEN/' /etc/samba/smb.conf"
+# run_cmd "sudo sed -i 's/workgroup = WORKGROUP/workgroup = TOKEN/' /etc/samba/smb.conf"
 
 # -------------------------------
 # Restart SSH service to apply changes
@@ -52,8 +32,8 @@ run_cmd "sudo sed -i 's/workgroup = WORKGROUP/workgroup = TOKEN/' /etc/samba/smb
 run_cmd "sudo systemctl restart ssh"
 
 # samba reload restart
-run_cmd "sudo systemctl daemon-reload"
-run_cmd "sudo systemctl restart smbd nmbd"
+# run_cmd "sudo systemctl daemon-reload"
+# run_cmd "sudo systemctl restart smbd nmbd"
 
 # echo "[INFO] Setup complete. Check $LOG_FILE for any errors."
 
