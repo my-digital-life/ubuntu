@@ -1,4 +1,5 @@
 #!/bin/bash
+# https://raw.githubusercontent.com/my-digital-life/ubuntu/refs/heads/main/setup.sh
 
 # Define a log file for error reporting
 LOG_FILE="/var/log/server_setup.log"
