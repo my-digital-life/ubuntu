@@ -25,12 +25,12 @@ run_cmd "sudo apt update"
 # -------------------------------
 # Upgrade all packages to latest versions
 # -------------------------------
-run_cmd "sudo apt -y dist-upgrade"
+run_cmd "sudo apt -y upgrade"
 
 # -------------------------------
 # Install SSH and OpenSSH server
 # -------------------------------
-run_cmd "sudo apt -y install ssh openssh-server"
+run_cmd "sudo apt -y install ssh openssh-server open-vm-tools samba cifs-utils smbclient"
 
 # -------------------------------
 # Enable root login via SSH
