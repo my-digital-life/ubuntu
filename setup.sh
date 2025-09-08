@@ -1,5 +1,6 @@
 #!/bin/bash
 # https://raw.githubusercontent.com/my-digital-life/ubuntu/refs/heads/main/setup.sh
+curl -L -o setup.sh https://raw.githubusercontent.com/my-digital-life/ubuntu/refs/heads/main/setup.sh && sudo chmod +x setup.sh | bash
 
 # Define a log file for error reporting
 LOG_FILE="/var/log/server_setup.log"
