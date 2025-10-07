@@ -1,0 +1,113 @@
+- name: Configure SSH, Samba, hostname, and static network
+  hosts: testservers
+  become: yes
+  tasks:
+
+    ### 🔐 SSH Configuration
+    - name: Install OpenSSH Server
+      apt:
+        name: openssh-server
+        state: present
+        update_cache: yes
+
+    - name: Enable password authentication
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^PasswordAuthentication'
+
+        line: 'PasswordAuthentication yes'
+
+
+        state: present
+
+    - name: Allow root login
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^PermitRootLogin'
+
+        line: 'PermitRootLogin yes'
+
+
+        state: present
+
+    - name: Restart SSH service
+      service:
+        name: ssh
+        state: restarted
+
+    ### 📁 Samba Configuration
+    - name: Install Samba
+      apt:
+        name: samba
+        state: present
+        update_cache: yes
+
+    - name: Create Samba share directory
+      file:
+        path: /media.share/pi21
+        state: directory
+        mode: '0777'
+        owner: nobody
+        group: nogroup
+
+    - name: Set Samba workgroup to TOKEN
+      lineinfile:
+        path: /etc/samba/smb.conf
+        regexp: '^workgroup ='
+        line: 'workgroup = TOKEN'
+        state: present
+
+    - name: Add Samba share to smb.conf
+      blockinfile:
+        path: /etc/samba/smb.conf
+        block: |
+          [pi21]
+          path = /media.share/pi21
+          browseable = yes
+          read only = no
+          guest ok = yes
+          force user = nobody
+          force group = nogroup
+          hosts allow = 192.168.0.0/16
+
+    - name: Restart Samba service
+      service:
+        name: smbd
+        state: restarted
+
+    ### 🖥️ Hostname Change
+    - name: Set hostname to pi21
+      hostname:
+        name: pi21
+
+    ### 🌐 Netplan Static IP Configuration
+
+    - name: Configure static IP with Netplan
+      copy:
+        dest: /etc/netplan/01-netcfg.yaml
+        content: |
+          network:
+            version: 2
+            ethernets:
+              eth0:
+                addresses:
+                  - 192.168.1.20/24
+                nameservers:
+                  addresses:
+                    - 1.1.1.1
+                    - 9.9.9.9
+                  search: [lan]
+                routes:
+                  - to: default
+                    via: 192.168.1.1
+      notify: Apply netplan
+
+  handlers:
+    - name: Apply netplan
+      command: netplan apply
+
+
+
+
+
+
