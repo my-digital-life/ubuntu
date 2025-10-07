@@ -1,0 +1,77 @@
+- name: Configure SSH and Samba
+  hosts: testservers
+  become: yes
+  tasks:
+
+    ### 🔐 SSH Setup
+    - name: Install OpenSSH Server
+      apt:
+        name: openssh-server
+        state: present
+        update_cache: yes
+
+    - name: Enable password authentication
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^PasswordAuthentication'
+        line: 'PasswordAuthentication yes'
+
+        state: present
+
+    - name: Allow root login
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^PermitRootLogin'
+
+        line: 'PermitRootLogin yes'
+
+        state: present
+
+    - name: Restart SSH service
+      service:
+        name: ssh
+        state: restarted
+
+    ### 📁 Samba Setup
+    - name: Install Samba
+      apt:
+        name: samba
+        state: present
+        update_cache: yes
+
+    - name: Create Samba share directory
+      file:
+        path: /media/share/test
+        state: directory
+        mode: '0777'
+        owner: nobody
+        group: nogroup
+
+    - name: Set Samba workgroup to TOKEN
+      lineinfile:
+        path: /etc/samba/smb.conf
+        regexp: '^workgroup ='
+
+        line: 'workgroup = TOKEN'
+
+
+        state: present
+
+    - name: Add open Samba share to smb.conf
+      blockinfile:
+        path: /etc/samba/smb.conf
+        block: |
+          [test]
+          path = /media/share/test
+          browseable = yes
+          read only = no
+          guest ok = yes
+          force user = nobody
+          force group = nogroup
+          hosts allow = 192.168.0.0/16
+
+    - name: Restart Samba service
+      service:
+        name: smbd
+        state: restarted
+
