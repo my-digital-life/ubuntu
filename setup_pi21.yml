@@ -14,19 +14,7 @@
       lineinfile:
         path: /etc/ssh/sshd_config
         regexp: '^PasswordAuthentication'
-
-
-
-
-
         line: 'PasswordAuthentication yes'
-
-
-
-
-
-
-
         state: present
 
     - name: Allow root login
@@ -34,23 +22,7 @@
         path: /etc/ssh/sshd_config
         regexp: '^PermitRootLogin'
 
-
-
-
-
-
-
         line: 'PermitRootLogin yes'
-
-
-
-
-
-
-
-
-
-
 
 
         state: present
@@ -80,16 +52,7 @@
         path: /etc/samba/smb.conf
         regexp: '^workgroup ='
 
-
-
-
-
-
         line: 'workgroup = TOKEN'
-
-
-
-
 
         state: present
 
@@ -116,14 +79,14 @@
       hostname:
         name: pi21
 
+    ### 🧼 Backup Default Netplan File
+    - name: Backup 50-cloud-init.yaml if it exists
+      command: mv /etc/netplan/50-cloud-init.yaml /etc/netplan/50-cloud-init.yaml.bak
+      args:
+        removes: /etc/netplan/50-cloud-init.yaml
+      ignore_errors: true
+
     ### 🌐 Netplan Static IP Configuration
-
-
-
-
-
-
-
 
     - name: Configure static IP with Netplan
       copy:
@@ -134,7 +97,7 @@
             ethernets:
               eth0:
                 addresses:
-                  - 192.168.1.21/24
+                  - 192.168.1.20/24
                 nameservers:
                   addresses:
                     - 1.1.1.1
@@ -148,102 +111,6 @@
   handlers:
     - name: Apply netplan
       command: netplan apply
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
