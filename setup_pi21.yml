@@ -15,7 +15,16 @@
         path: /etc/ssh/sshd_config
         regexp: '^PasswordAuthentication'
 
+
+
+
+
         line: 'PasswordAuthentication yes'
+
+
+
+
+
 
 
         state: present
@@ -25,7 +34,23 @@
         path: /etc/ssh/sshd_config
         regexp: '^PermitRootLogin'
 
+
+
+
+
+
+
         line: 'PermitRootLogin yes'
+
+
+
+
+
+
+
+
+
+
 
 
         state: present
@@ -54,7 +79,18 @@
       lineinfile:
         path: /etc/samba/smb.conf
         regexp: '^workgroup ='
+
+
+
+
+
+
         line: 'workgroup = TOKEN'
+
+
+
+
+
         state: present
 
     - name: Add Samba share to smb.conf
@@ -82,6 +118,13 @@
 
     ### 🌐 Netplan Static IP Configuration
 
+
+
+
+
+
+
+
     - name: Configure static IP with Netplan
       copy:
         dest: /etc/netplan/01-netcfg.yaml
@@ -91,7 +134,7 @@
             ethernets:
               eth0:
                 addresses:
-                  - 192.168.1.20/24
+                  - 192.168.1.21/24
                 nameservers:
                   addresses:
                     - 1.1.1.1
@@ -105,6 +148,103 @@
   handlers:
     - name: Apply netplan
       command: netplan apply
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
