@@ -1,7 +1,20 @@
-- name: Configure SSH, Samba, hostname, and static network
+- name: Configure user, SSH, Samba, hostname, and static network
   hosts: testservers
   become: yes
+  vars:
+    new_username: pi21
+    new_password: mypassword
   tasks:
+
+    ### 👤 Create New User
+    - name: Create user {{ new_username }}
+      user:
+        name: "{{ new_username }}"
+        password: "{{ new_password | password_hash('sha512') }}"
+        shell: /bin/bash
+        groups: sudo
+        state: present
+        create_home: yes
 
     ### 🔐 SSH Configuration
     - name: Install OpenSSH Server
@@ -21,10 +34,7 @@
       lineinfile:
         path: /etc/ssh/sshd_config
         regexp: '^PermitRootLogin'
-
         line: 'PermitRootLogin yes'
-
-
         state: present
 
     - name: Restart SSH service
@@ -51,9 +61,7 @@
       lineinfile:
         path: /etc/samba/smb.conf
         regexp: '^workgroup ='
-
         line: 'workgroup = TOKEN'
-
         state: present
 
     - name: Add Samba share to smb.conf
@@ -87,7 +95,6 @@
       ignore_errors: true
 
     ### 🌐 Netplan Static IP Configuration
-
     - name: Configure static IP with Netplan
       copy:
         dest: /etc/netplan/01-netcfg.yaml
@@ -111,10 +118,3 @@
   handlers:
     - name: Apply netplan
       command: netplan apply
-
-
-
-
-
-
-
