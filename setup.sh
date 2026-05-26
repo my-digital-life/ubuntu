@@ -15,13 +15,16 @@ sudo apt -y upgrade
 # -------------------------------
 # Install SSH and OpenSSH server
 # -------------------------------
-sudo apt -y install ssh openssh-server open-vm-tools samba cifs-utils smbclient
+
+sudo apt -y install openssh-server open-vm-tools samba cifs-utils smbclient
 
 # -------------------------------
 # Enable root login via SSH
 # This modifies the sshd_config file to allow root login
 # -------------------------------
+
 sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
 
 # -------------------------------
 # Restart SSH service to apply changes
