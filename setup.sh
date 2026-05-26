@@ -29,5 +29,5 @@ sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh
 sudo systemctl restart ssh
 
 # -------------------------------
-echo "[INFO] Setup complete. Run ./setup.sh"
+echo "[INFO] Setup complete.
 # -------------------------------
