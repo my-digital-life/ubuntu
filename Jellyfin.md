@@ -18,9 +18,7 @@ Media files are stored on a Windows SMB share:
 
 \\192.168.1.14\tv
 
-Windows Username:
-
-Scott
+Windows Username:  
 
 ---
 
