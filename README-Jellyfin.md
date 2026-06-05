@@ -1,3 +1,6 @@
 # ubuntu
 Installing Jellyfin On Ubuntu 24.04  
-Note this did not work on Ubuntu 24.04.4
+ubuntu-26.04-live-server-amd64.iso
+
+Note this did not work on Ubuntu 24.04.4  
+ubuntu-24.04.4-live-server-amd64.iso
