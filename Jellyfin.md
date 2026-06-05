@@ -174,7 +174,7 @@ http://SERVER-IP:8096
 Example:
 
 ```text
-http://192.168.1.50:8096
+http://192.168.1.155:8096
 ```
 
 Complete the initial setup wizard.
@@ -202,13 +202,13 @@ sudo nano /root/tv.creds
 Contents:
 
 ```text
-username=Scott
+username=windos username
 password=YOUR_WINDOWS_PASSWORD
 ```
 
 Secure the credentials file:
 
-```bash
+```bashs
 sudo chmod 600 /root/tv.creds
 ```
 
