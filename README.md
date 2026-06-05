@@ -1,4 +1,5 @@
-# ubuntu Jellyfin.md  
+# ubuntu  
+Jellyfin.md  
 Installing Jellyfin On Ubuntu 24.04  
 ubuntu-26.04-live-server-amd64.iso
 
