@@ -47,6 +47,7 @@ cifs-utils \
 smbclient \
 ufw \
 apt-transport-https \
+winbind \
 gnupg \
 htop
 ```
