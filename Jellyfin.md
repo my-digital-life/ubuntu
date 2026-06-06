@@ -81,7 +81,8 @@ htop
 
 ---
 
-## Step 3 - Configure Firewall
+## Step 3 - Configure Firewall  
+##### This can be skipped The script installs ufw But it's not enabled
 
 Allow SSH:
 
