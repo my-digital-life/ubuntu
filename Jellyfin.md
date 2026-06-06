@@ -144,10 +144,10 @@ sudo systemctl enable jellyfin
 
 ## Step 6 - Access Jellyfin
 
-Find the server IP address:
+Find the server host name and IP address:
 
 ```bash
-hostname -I
+hostname -A && hostname -I
 ```
 
 Open a browser and navigate to:
