@@ -32,25 +32,11 @@ sudo apt full-upgrade -y
 sudo reboot
 ```
 
-Verify the operating system:
-
-```bash
-lsb_release -a
-```
-
-Expected output:
-
-```text
-Distributor ID: Ubuntu
-Description: Ubuntu 24.04.4 LTS
-Codename: noble
-```
-
 ---
 
 ## Step 2 - Install Required Packages
 
-Install common utilities and SMB support.
+#####Install common utilities and SMB support.
 
 ```bash
 sudo apt install -y \
