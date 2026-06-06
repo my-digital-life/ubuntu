@@ -36,7 +36,7 @@ sudo reboot
 
 ## Step 2 - Install Required Packages
 
-#####Install common utilities and SMB support.
+##### Install common utilities and SMB support.
 
 ```bash
 sudo apt install -y \
