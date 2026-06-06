@@ -164,7 +164,7 @@ http://192.168.1.155:8096
 
 ### Complete the initial setup wizard.  
 ###### Set user name and password  
-###### Note this guide assumes that you have a folder share Somewhere called lowercase tv  
+#### Note this guide assumes that you have a folder share Somewhere called lowercase tv  
 ###### Note this guide requires That you type all these commands with your thumbs
 ---
 
