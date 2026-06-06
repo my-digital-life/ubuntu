@@ -142,7 +142,7 @@ sudo systemctl enable jellyfin
 
 ---
 
-## Step 6 - Access Jellyfin
+## Step 6 - Access Jellyfin  
 
 Find the server host name and IP address:
 
@@ -162,7 +162,8 @@ Example:
 http://192.168.1.155:8096
 ```
 
-Complete the initial setup wizard.
+###Complete the initial setup wizard.  
+###### Set user name and password
 
 ---
 
